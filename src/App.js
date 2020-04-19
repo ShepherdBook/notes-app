@@ -2,19 +2,32 @@ import React from 'react';
 import NoteList from './NoteList';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 import NoteCreate from './NoteCreate';
+import { createStore } from 'redux';
+import reducer from './redux/reducer';
+import { saveNote } from "./redux/actions";
 
 function App() {
 
-  const notes = [
-    {
-      id: 'a',
-      value: 'note 1',
-     },
-     {
-       id: 'b',
-       value: 'note 2',
-     }
-  ]
+  const initialState = {
+    notes: [
+      {
+        id: 'a',
+        value: 'note 1',
+      },
+      {
+        id: 'b',
+        value: 'note 2',
+      }
+    ]
+  }
+
+  const store = createStore(reducer, initialState)
+
+  console.log(store.getState())
+  store.dispatch(saveNote({id:'c', value: 'new note'}))
+  console.log(store.getState())
+
+  const {notes} = store.getState()
 
   return (
     <BrowserRouter>
