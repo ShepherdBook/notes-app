@@ -7,14 +7,12 @@ function App() {
 
   const notes = [
     {
-      id: 1,
-      subject: 'subject 1',
-      body: 'body 1',
+      id: 'a',
+      value: 'note 1',
      },
      {
-       id: 2,
-       subject: 'subject 2',
-       body: 'body 2',
+       id: 'b',
+       value: 'note 2',
      }
   ]
 

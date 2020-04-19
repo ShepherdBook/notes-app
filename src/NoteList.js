@@ -8,7 +8,7 @@ function NoteList(props) {
         <ul>
             {notes.map(note => (
                 <li key={note.id}>
-                    {note.subject}
+                    {note.value}
                 </li>
             ))}
         </ul>
