@@ -1,5 +1,6 @@
 import React from 'react';
 import NoteList from './NoteList';
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 
 function App() {
 
@@ -17,10 +18,25 @@ function App() {
   ]
 
   return (
-    <div>
-      <h1>Notes</h1>
-      <NoteList notes={notes}/>
-    </div>
+    <BrowserRouter>
+      <div>
+        <nav>
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/notes'>List</Link></li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path='/notes'>
+            <NoteList notes={notes} />
+          </Route>
+          <Route path='/'>
+            <h1>Notes App</h1>
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
