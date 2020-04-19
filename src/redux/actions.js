@@ -1,6 +1,11 @@
-import { SAVE_NOTE } from './actionTypes'
+import { CREATE_NOTE } from './actionTypes'
 
-export const saveNote = (note) => ({
-    type: SAVE_NOTE,
-    payload: note,
+let nextId = 2
+
+export const createNote = noteValue => ({
+    type: CREATE_NOTE,
+    payload: {
+        id: nextId++,
+        value: noteValue
+    },
 })

@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
-import { SAVE_NOTE } from "./actionTypes";
+import { CREATE_NOTE } from "./actionTypes";
 
 function notes(state = [], action) {
+    console.log(action)
     switch(action.type) {
-        case SAVE_NOTE: {
+        case CREATE_NOTE: {
             return [
                 ...state,
                 action.payload
