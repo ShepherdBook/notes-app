@@ -1,6 +1,7 @@
 import React from 'react';
 import NoteList from './NoteList';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import NoteCreate from './NoteCreate';
 
 function App() {
 
@@ -24,10 +25,14 @@ function App() {
           <ul>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/notes'>List</Link></li>
+            <li><Link to='/new'>Create</Link></li>
           </ul>
         </nav>
 
         <Switch>
+          <Route path='/create'>
+            <NoteCreate />
+          </Route>
           <Route path='/notes'>
             <NoteList notes={notes} />
           </Route>
