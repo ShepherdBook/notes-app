@@ -23,7 +23,7 @@ function App() {
           <ul>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/notes'>List</Link></li>
-            <li><Link to='/new'>Create</Link></li>
+            <li><Link to='/create'>Create</Link></li>
           </ul>
         </nav>
 
