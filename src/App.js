@@ -2,16 +2,26 @@ import React from 'react';
 import NoteList from './NoteList';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 import NoteCreate from './NoteCreate';
-import { createStore } from 'redux';
-import reducer from './redux/reducer';
-import { createNote } from "./redux/actions";
+import { createNote } from "./redux/actions/notes";
 import { Provider } from 'react-redux';
+import { makeStore } from './redux/store';
+
+import { fireAuth } from './firebase/init'
 
 function App() {
 
-  const store = createStore(reducer, {})
+  const store = makeStore()
 
   const dispatchCreateNote = newValue => store.dispatch(createNote(newValue))
+
+  fireAuth.signInWithEmailAndPassword('zachjohnston26+notes@pm.me', 'fr33range')
+    .catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode, errorMessage)
+    });
+
+  dispatchCreateNote('This note was automatically created in App.js')
 
   return (
     <Provider store={store}>
