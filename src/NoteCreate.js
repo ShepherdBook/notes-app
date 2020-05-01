@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 function NoteCreate(props) {
 
     const [ preview, setPreview ] = useState('')
-    const { dispatchCreateNote } = props
+    const { dispatchCreateNote, currentUser: {uid} } = props
 
     const onPreviewChanged = (newPreview) => {
         setPreview(newPreview)
     }
 
     const Create = () => {
-        dispatchCreateNote(preview)
+        dispatchCreateNote(preview, uid)
         setPreview('')
     }
 
@@ -31,4 +32,11 @@ function NoteCreate(props) {
     )
 }
 
-export default NoteCreate
+const mapStateToProps = state => ({
+    currentUser: state.currentUser,
+  })
+
+export default connect(
+    mapStateToProps,
+    null,
+)(NoteCreate)

@@ -12,7 +12,7 @@ function App() {
 
   const store = makeStore()
 
-  const dispatchCreateNote = newValue => store.dispatch(createNote(newValue))
+  const dispatchCreateNote = (newValue, userId) => store.dispatch(createNote(newValue, userId))
 
   fireAuth.signInWithEmailAndPassword('zachjohnston26+notes@pm.me', 'fr33range')
     .catch(function(error) {
@@ -21,7 +21,7 @@ function App() {
       console.log(errorCode, errorMessage)
     });
 
-  dispatchCreateNote('This note was automatically created in App.js')
+  // dispatchCreateNote('This note was automatically created in App.js')
 
   return (
     <Provider store={store}>
