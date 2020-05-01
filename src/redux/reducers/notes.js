@@ -7,10 +7,7 @@ function notesReducer(state = [], { type, payload }) {
             return notes
         }
         case CREATE_NOTE: {
-            return [
-                ...state,
-                payload,
-            ]
+            return state
         }
         default: return state
     }
