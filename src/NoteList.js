@@ -9,7 +9,7 @@ function NoteList({ notes, currentUser }) {
             <ul>
                 {notes.map(note => (
                     <li key={note.id}>
-                        {note.value}
+                        {note.value} ({note.createdAt})
                     </li>
                 ))}
             </ul>

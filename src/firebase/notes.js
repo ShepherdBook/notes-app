@@ -7,5 +7,7 @@ export const addNoteToFireStore = async (note) => {
 }
 
 export function fetchUserNotesFromFirestore(userId) {
-  return notesCollection.where("userId", "==", userId)
+  return notesCollection
+    .where("userId", "==", userId)
+    .orderBy("createdAt", "desc")
 }

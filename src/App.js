@@ -21,8 +21,6 @@ function App() {
       console.log(errorCode, errorMessage)
     });
 
-  // dispatchCreateNote('This note was automatically created in App.js')
-
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -30,7 +28,6 @@ function App() {
           <nav>
             <ul>
               <li><Link to='/'>Home</Link></li>
-              <li><Link to='/notes'>List</Link></li>
               <li><Link to='/create'>Create</Link></li>
             </ul>
           </nav>
@@ -38,9 +35,6 @@ function App() {
           <Switch>
             <Route path='/create'>
               <NoteCreate dispatchCreateNote={dispatchCreateNote} />
-            </Route>
-            <Route path='/notes'>
-              <NoteList />
             </Route>
             <Route path='/'>
               <h1>Notes App</h1>
