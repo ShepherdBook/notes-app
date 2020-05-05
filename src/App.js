@@ -1,25 +1,15 @@
 import React from 'react';
-import NoteList from './NoteList';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
-import NoteCreate from './NoteCreate';
-import { createNote } from "./redux/actions/notes";
 import { Provider } from 'react-redux';
 import { makeStore } from './redux/store';
-
-import { fireAuth } from './firebase/init'
+import SignIn from './SignIn';
+import SignOut from './SignOut';
+import NoteList from './NoteList';
+import NoteCreate from './NoteCreate';
 
 function App() {
 
   const store = makeStore()
-
-  const dispatchCreateNote = (newValue, userId) => store.dispatch(createNote(newValue, userId))
-
-  fireAuth.signInWithEmailAndPassword('zachjohnston26+notes@pm.me', 'fr33range')
-    .catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode, errorMessage)
-    });
 
   return (
     <Provider store={store}>
@@ -29,12 +19,20 @@ function App() {
             <ul>
               <li><Link to='/'>Home</Link></li>
               <li><Link to='/create'>Create</Link></li>
+              <li><Link to='/sign-in'>Sign In</Link></li>
+              <li><Link to='/sign-out'>Sign Out</Link></li>
             </ul>
           </nav>
 
           <Switch>
+            <Route path='/sign-out'>
+              <SignOut />
+            </Route>
+            <Route path='/sign-in'>
+              <SignIn />
+            </Route>
             <Route path='/create'>
-              <NoteCreate dispatchCreateNote={dispatchCreateNote} />
+              <NoteCreate />
             </Route>
             <Route path='/'>
               <h1>Notes App</h1>

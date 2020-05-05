@@ -23,12 +23,21 @@ export const makeStore = () => {
             store.dispatch(setCurrentUser(user.toJSON()))
 
             // Set an observer on the user's notes
-            fetchUserNotesFromFirestore(user.uid).onSnapshot(snapshot => {
-                const notes = snapshot.docs.map(note => buildNoteObject(note))
-                store.dispatch(fetchUserNotes(notes))
-            })
+            fetchUserNotesFromFirestore(user.uid)
+                .onSnapshot(snapshot => {
+                        const notes = snapshot.docs.map(note => buildNoteObject(note))
+                        store.dispatch(fetchUserNotes(notes))
+                    }
+                    // onSnapshot throws a permissions error if the user has signed out.
+                    // Catch this error, then Firebase will automatically unsubscribe
+                    // the onSnapshot listener.
+                    // https://firebase.google.com/docs/firestore/query-data/listen#handle_listen_errors
+                    ,() => {}
+                )
         } else {
             // User is not logged in
+            store.dispatch(setCurrentUser(null))
+            store.dispatch(fetchUserNotes(null))
         }
     })
 
