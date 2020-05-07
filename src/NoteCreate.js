@@ -33,15 +33,25 @@ function NoteCreate(props) {
             <div>
                 <h1>New Note</h1>
                 <form onSubmit={Create}>
-                    <input type='text' 
+                    <label>
+                        Title:
+                        <br />
+                        <input type='text' 
                            value={title}
                            required={true}
                            onChange={e => onTitleChanged(e.target.value)}/>
-                    <input type='text' 
+                    </label>
+                    <br/>
+                    <label>
+                        Body:
+                        <br />
+                        <textarea type='text' 
                            value={body}
                            required={true}
                            onChange={e => onBodyChanged(e.target.value)}/>
-                    <input type='submit' value='Save' />
+                    </label>
+                    <br />
+                    <input type='submit' value='Save Note' />
                 </form>
                 <div>
                     <h2>Preview</h2>

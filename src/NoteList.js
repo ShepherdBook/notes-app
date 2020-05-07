@@ -10,12 +10,12 @@ function NoteList({ notes, currentUser }) {
     } else {
         return (
             <div>
-                <h1>Note List</h1>
                 <p>Hi { currentUser.email }!</p>
+                <h1>Note List</h1>
                 <ul>
                     {notes.map(note => (
                         <li key={note.id}>
-                            <h4>{note.title} <small>{note.createdAt}</small></h4>
+                            <h4>{note.title} ({note.createdAt})</h4>
                             <p>{note.body}</p>
                         </li>
                     ))}
