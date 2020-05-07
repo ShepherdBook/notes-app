@@ -4,16 +4,23 @@ import { createNote } from './redux/actions/notes';
 
 function NoteCreate(props) {
 
-    const [ preview, setPreview ] = useState('')
+    const [ title, setTitle ] = useState('')
+    const [ body, setBody ] = useState('')
+
     const { createNote, currentUser } = props
 
-    const onPreviewChanged = (newPreview) => {
-        setPreview(newPreview)
+    const onTitleChanged = (newTitle) => {
+        setTitle(newTitle)
+    }
+
+    const onBodyChanged = (newBody) => {
+        setBody(newBody)
     }
 
     const Create = () => {
-        createNote(preview, currentUser.uid)
-        setPreview('')
+        createNote(title, body, currentUser.uid)
+        setTitle('')
+        setBody('')
     }
 
     if (!currentUser) {
@@ -26,12 +33,16 @@ function NoteCreate(props) {
                 <h1>New Note</h1>
                 <div>
                     <input type='text' 
-                           value={preview}
-                           onChange={e => onPreviewChanged(e.target.value)}/>
+                           value={title}
+                           onChange={e => onTitleChanged(e.target.value)}/>
+                    <input type='text' 
+                           value={body}
+                           onChange={e => onBodyChanged(e.target.value)}/>
                 </div>
                 <div>
-                    <h3>Preview</h3>
-                    <span>{preview}</span>
+                    <h2>Preview</h2>
+                    <h4>{title}</h4>
+                    <p>{body}</p>
                 </div>
                 <input type='button' value='Save' onClick={Create} />
             </div>
@@ -46,6 +57,6 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     dispatch => ({
-        createNote: (newValue, userId) => dispatch(createNote(newValue, userId))
+        createNote: (title, body, userId) => dispatch(createNote(title, body, userId))
     }),
 )(NoteCreate)

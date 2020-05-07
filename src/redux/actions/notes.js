@@ -1,16 +1,17 @@
 import { CREATE_NOTE, FETCH_USER_NOTES } from "./actionTypes"
 import { addNoteToFireStore } from "../../firebase/notes";
 
-export const createNote = (value, userId) => (
+export const createNote = (title, body, userId) => (
     async dispatch => {
         try {
             const createdAt = Date.now()
-            console.log('createNote: ', value, userId, createdAt)
-            await addNoteToFireStore({value, userId, createdAt})
+            console.log('createNote: ', title, body, userId, createdAt)
+            await addNoteToFireStore({title, body, userId, createdAt})
             dispatch({
                 type: CREATE_NOTE,
                 payload: {
-                    value,
+                    title,
+                    body,
                     userId,
                     createdAt,
                 },
