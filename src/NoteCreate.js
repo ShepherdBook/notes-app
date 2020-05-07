@@ -17,7 +17,8 @@ function NoteCreate(props) {
         setBody(newBody)
     }
 
-    const Create = () => {
+    const Create = (e) => {
+        e.preventDefault()
         createNote(title, body, currentUser.uid)
         setTitle('')
         setBody('')
@@ -31,20 +32,22 @@ function NoteCreate(props) {
         return(
             <div>
                 <h1>New Note</h1>
-                <div>
+                <form onSubmit={Create}>
                     <input type='text' 
                            value={title}
+                           required={true}
                            onChange={e => onTitleChanged(e.target.value)}/>
                     <input type='text' 
                            value={body}
+                           required={true}
                            onChange={e => onBodyChanged(e.target.value)}/>
-                </div>
+                    <input type='submit' value='Save' />
+                </form>
                 <div>
                     <h2>Preview</h2>
                     <h4>{title}</h4>
                     <p>{body}</p>
                 </div>
-                <input type='button' value='Save' onClick={Create} />
             </div>
         )
     }    
