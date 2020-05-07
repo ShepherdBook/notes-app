@@ -1,18 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from "react-redux"
 import { signInWithEmailAndPassword } from "./redux/actions/user";
 
 function SignIn(props) {
-    const { signInWithEmailAndPassword } = props
-    signInWithEmailAndPassword('zachjohnston26+notes@pm.me', 'fr33range')
+    const { signInWithEmailAndPassword, currentUser } = props
 
-    return (
-        <div>
-            <h1>Login</h1>
-                <input type='text' />
-                <input type='text' />
-        </div>
-    )
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const SignIn = (e) => {
+        e.preventDefault()
+        if (!currentUser) {
+            signInWithEmailAndPassword(email, password)
+            setEmail('')
+            setPassword('')
+        }
+    }
+
+    if (currentUser) {
+        return (
+            <span>Hi { currentUser.email }, you are already logged in.</span>
+        )
+    } else {
+        return (
+            <form onSubmit={SignIn}>
+                <h1>Login</h1>
+                <input type='email' 
+                    autoComplete='none' 
+                    autoCapitalize='false'
+                    autoFocus={true}
+                    value={email} 
+                    onChange={e => setEmail(e.target.value)} 
+                />
+                <input type='password' 
+                    autoComplete='password' 
+                    autoCapitalize='false'
+                    security='true'
+                    value={password} 
+                    onChange={e => setPassword(e.target.value)}
+                />
+                <input type='submit' value='Sign In'/>
+            </form>
+        )
+    }
 }
 
 const mapStateToProps = state => ({
